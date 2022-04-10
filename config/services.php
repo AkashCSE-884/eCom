@@ -34,10 +34,6 @@ return [
         'client_secret' => '', //USE FROM FACEBOOK DEVELOPER ACCOUNT
         'redirect' => 'https://examplelaravel8.test/facebook/callback/'
     ],
-    'google' => [
-        'client_id' => '1058074718780-vihgucq6cpu98d4ocvcb5uraeulknjnj.apps.googleusercontent.com', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'client_secret' => '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', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'redirect' => 'https://127.0.0.1:8000/google/callback/'
-    ],
+
 
 ];
