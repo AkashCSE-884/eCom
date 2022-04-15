@@ -11,19 +11,19 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api, code:2');
+        $this->middleware('auth:api');
     }
     public function productInsert(Request $req)
     {
         $validator = Validator::make($req->all(), [
             'name' => 'required|string',
-            'content' => 'required|string|max:5000',
+            // 'content' => 'required|string|max:5000',
             'price' => 'required|numeric',
             'image_path' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json($validator->errors());
         }
 
         $product = new Product();
@@ -50,7 +50,7 @@ class ProductController extends Controller
             'id' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json($validator->errors(), 200);
         }
 
         $data = Product::find($req->id);
@@ -59,13 +59,13 @@ class ProductController extends Controller
             $validator = Validator::make($req->all(), [
 
                 'name' => 'required|string|between:2,100',
-                'content' => 'required|string|max:5000',
-                'price' => 'required|numeric',
-                'image_path' => 'required',
+                // 'content' => 'required|string|max:5000',
+                'price' => 'required|numeric'
+                // 'image_path' => 'required',
 
             ]);
             if ($validator->fails()) {
-                return response()->json($validator->errors(), 400);
+                return response()->json($validator->errors(), 200);
             }
             $product = new Product();
 
@@ -75,16 +75,16 @@ class ProductController extends Controller
             if ($file) {
                 $filename = $file->getClientOriginalName();
                 $file->move(public_path('image'), $filename);
-                $data->image_path = $filename;
+                $data->image_path = 'image/' . $filename;
             }
             $data->name = $req->name;
             $data->content = $req->content;
             $data->price = $req->price;
 
-            $data = $data->save();
+            $ress = $data->save();
 
-            if ($data) {
-                $data = $product::find($data);
+            if ($ress) {
+                $data = $product::find($req->id);
                 return response()->json([
                     'message' => 'product successfully updated',
                     'ret_data' => $data
@@ -119,6 +119,7 @@ class ProductController extends Controller
     {
         return response()->json(['ret_data' => Product::all()]);
     }
+
     public function selectProduct(Request $req)
     {
         $validator = Validator::make($req->all(), [
@@ -133,5 +134,8 @@ class ProductController extends Controller
         } else {
             return response()->json(['err_msg' => 'invalid id provided']);
         }
+    }
+    public function searchProduct(Request $req){
+        return response()->json(['ret_data' => Product::where("name", "Like","%".$req->name."%" )->get()]);
     }
 }

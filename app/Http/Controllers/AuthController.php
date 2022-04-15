@@ -31,7 +31,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(),400);
         }
         if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized']);

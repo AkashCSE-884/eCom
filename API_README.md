@@ -22,4 +22,13 @@ http://127.0.0.1:8000/api/product/delete
 http://127.0.0.1:8000/api/product/select-product
 
 http://127.0.0.1:8000/api/product/select-products
+
+http://127.0.0.1:8000/api/product/search-product/{name}
+
 ----------------End Products-------------
+
+Admin : admin@gmail.com
+pass: 123456
+
+Admin : kamal@gmail.com
+pass: 123456

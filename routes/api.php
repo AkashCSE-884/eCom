@@ -39,18 +39,14 @@ Route::group([
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'product'
-
+    'prefix' => 'product',
+    'code' => 2
 ], function ($router) {
 
     Route::post('/insert', [ProductController::class, 'productInsert']);
-    Route::put('/update', [ProductController::class, 'productUpdate']);
-    Route::delete('/delete', [ProductController::class, 'deleteProduct']);
+    Route::post('/update', [ProductController::class, 'productUpdate']);
+    Route::post('/delete', [ProductController::class, 'deleteProduct']);
     Route::get('/select-products', [ProductController::class, 'selectProducts']);
-    Route::get('/select-product', [ProductController::class, 'selectProduct']);
-
+    Route::post('/select-product', [ProductController::class, 'selectProduct']);
+    Route::get('/search-product/{name}', [ProductController::class, 'searchProduct']);
 });
-
-
-
-
