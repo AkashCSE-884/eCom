@@ -1,4 +1,5 @@
 ----------------Start User-------------
+
 http://127.0.0.1:8000/api/auth/register
 
 http://127.0.0.1:8000/api/auth/user
@@ -13,6 +14,7 @@ http://127.0.0.1:8000/api/auth/login
 
 
 ----------------Start Products-------------
+
 http://127.0.0.1:8000/api/product/insert
 
 http://127.0.0.1:8000/api/product/update
